@@ -1,0 +1,9 @@
+Edit Database (includes/config.php) and (admin/includes/config.php)
+
+Login to Admin
+
+Url: http://www.yourdomain.com/admin/
+
+Username : admin
+
+Password : 963852741

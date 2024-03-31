@@ -51,17 +51,21 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
-						<h1 class="text-center text-bold mt-4x">Admin Login</h1>
-						<div class="well row pt-2x pb-3x bk-light">
+						<h1 class="text-center text-bold mt-4x">Bak Law Portal</h1>
+						<h6 class="text-center text-bold ">Administrator</h1>
+						<div class="well row" style="border: 2px solid maroon">
 							<div class="col-md-8 col-md-offset-2">
 								<form method="post">
 
-									<label for="" class="text-uppercase text-sm">Your Username </label>
+									<label for="" class="text-uppercase text-sm">Username </label>
 									<input type="text" placeholder="Username" name="username" class="form-control mb" required>
 
 									<label for="" class="text-uppercase text-sm">Password</label>
 									<input type="password" placeholder="Password" name="password" class="form-control mb" required>
-									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
+
+									<button class="btn btn-success btn-md" name="login" type="submit" style="padding: 5px 23px; font-size: 17px; background: maroon;">
+									 Sign In</button>
+
 								</form>
 							</div>
 						</div>

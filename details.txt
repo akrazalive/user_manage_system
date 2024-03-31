@@ -7,3 +7,12 @@ Url: http://www.yourdomain.com/admin/
 Username : admin
 
 Password : 963852741
+
+baklawpo_db
+baklawpo_user
+PiHO,&V]r^kP
+
+Cpanel details
+Ip : 65.108.68.22
+u : baklawpo
+p : LX[97(awG23Oft

@@ -19,7 +19,6 @@ if(isset($_POST['submit']))
 	$name=$_POST['name'];
 	$email=$_POST['email'];
 	$mobileno=$_POST['mobile'];
-	$designation=$_POST['designation'];
 	$idedit=$_POST['editid'];
 	$image=$_POST['image'];
 
@@ -33,7 +32,6 @@ if(isset($_POST['submit']))
 	$query-> bindParam(':name', $name, PDO::PARAM_STR);
 	$query-> bindParam(':email', $email, PDO::PARAM_STR);
 	$query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-	$query-> bindParam(':designation', $designation, PDO::PARAM_STR);
 	$query-> bindParam(':image', $image, PDO::PARAM_STR);
 	$query-> bindParam(':idedit', $idedit, PDO::PARAM_STR);
 	$query->execute();
@@ -125,8 +123,8 @@ if(isset($_POST['submit']))
 	<div class="col-sm-4">
 	</div>
 	<div class="col-sm-4 text-center">
-		<img src="images/<?php echo htmlentities($result->image);?>" style="width:200px; border-radius:50%; margin:10px;">
-		<input type="file" name="image" class="form-control">
+		<img src="images/<?php echo htmlentities($result->image);?>" style="width:200px; margin:10px;">
+		<input type="file" name="image" class="form-control hide">
 		<input type="hidden" name="image" class="form-control" value="<?php echo htmlentities($result->image);?>">
 	</div>
 	<div class="col-sm-4">
@@ -134,33 +132,85 @@ if(isset($_POST['submit']))
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">Name<span style="color:red">*</span></label>
+	<label class="col-sm-2 control-label">Name</label>
 	<div class="col-sm-4">
-	<input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name);?>">
+	<input disabled type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name);?>">
 	</div>
 
-	<label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
+	<label class="col-sm-2 control-label">Date of birth</label>
+<div class="col-sm-4">
+<input disabled type="text" name="dob" class="form-control" required value="<?php echo $result->dob;?>">
+</div>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">Mobile</label>
 	<div class="col-sm-4">
-	<input type="email" name="email" class="form-control" required value="<?php echo htmlentities($result->email);?>">
+	<input disabled type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
+	</div>
+
+	<label class="col-sm-2 control-label">Gender</label>
+	<div class="col-sm-4">
+	<select disabled name="gender" class="form-control" required>
+	    <option value="">Select</option>
+	     <option value="Male" <?php if($result->gender == "Male") echo "selected"; ?>>Male</option>
+	     <option value="Female" <?php if($result->gender == "Female") echo "selected"; ?>>Female</option>
+	  </select>
 	</div>
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">Mobile<span style="color:red">*</span></label>
-	<div class="col-sm-4">
-	<input type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
-	</div>
+<label class="col-sm-2 control-label">Nationality</label>
+<div class="col-sm-4">
+<select disabled name="nationality" class="form-control" required>
+    <option value="">Select</option>
+     <option value="Pakistani" <?php if($result->nationality == "Pakistani") echo "selected"; ?>>Pakistani</option>
+     <option value="Non Pakistani" <?php if($result->nationality == "Non Pakistani") echo "selected"; ?>>Non Pakistani</option>
+  </select>
+</div>
 
-	<label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
-	<div class="col-sm-4">
-	<input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation);?>">
-	</div>
+<label class="col-sm-2 control-label">House Office Reference</label>
+<div class="col-sm-4">
+<input disabled type="text" name="hor" class="form-control" required value="<?php echo $result->hor;?>">
+</div>
+</div>
+
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Case Type</label>
+<div class="col-sm-4">
+<input disabled type="text" name="case_type" class="form-control" required value="<?php echo $result->case_type;?>">
+</div>
+
+<label class="col-sm-2 control-label">Case Status</label>
+<div class="col-sm-4">
+<input disabled type="text" name="case_status" class="form-control" required value="<?php echo $result->case_status;?>">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Outstanding Fee</label>
+<div class="col-sm-4">
+<input disabled type="text" name="fee" class="form-control" required value="<?php echo $result->fee;?>">
+</div>
+
+<label class="col-sm-2 control-label">Case Registration Date</label>
+<div class="col-sm-4">
+<input disabled type="text" name="registration_date" class="form-control" required value="<?php echo $result->registration_date;?>">
+</div>
+</div>
+
+
+
 </div>
 <input type="hidden" name="editid" class="form-control" required value="<?php echo htmlentities($result->id);?>">
 
-<div class="form-group">
+<div class="form-group hide">
 	<div class="col-sm-8 col-sm-offset-2">
-		<button class="btn btn-primary" name="submit" type="submit">Save Changes</button>
+		<button style="background: maroon;
+    color: white;
+    font-size: 17px;
+    padding: 7px 9px;" class="btn btn-primary" name="submit" type="submit">Save Changes</button>
 	</div>
 </div>
 

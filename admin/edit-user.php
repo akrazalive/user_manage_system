@@ -1,6 +1,7 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
 include('includes/config.php');
 if(strlen($_SESSION['alogin'])==0)
 	{	
@@ -24,10 +25,17 @@ if(isset($_POST['submit']))
 	$final_file=str_replace(' ','-',$new_file_name);
 	
 	$name=$_POST['name'];
-	$email=$_POST['email'];
-	$gender=$_POST['gender'];
-	$mobileno=$_POST['mobileno'];
-	$designation=$_POST['designation'];
+    $email=$_POST['email'];
+    $gender=$_POST['gender'];
+    $mobileno=$_POST['mobileno'];
+    $hor=$_POST['hor'];
+    $dob=$_POST['dob'];
+    $nationality=$_POST['nationality'];
+    $case_status=$_POST['case_status'];
+    $case_type=$_POST['case_type'];
+    $fee=$_POST['fee'];
+    $notes=$_POST['notes'];
+    $registration_date=$_POST['registration_date'];
 	$idedit=$_POST['idedit'];
 	$image=$_POST['image'];
 
@@ -36,17 +44,25 @@ if(isset($_POST['submit']))
 			$image=$final_file;
 		}
 
-	$sql="UPDATE users SET name=(:name), email=(:email), gender=(:gender), mobile=(:mobileno), designation=(:designation), Image=(:image) WHERE id=(:idedit)";
+	$sql="UPDATE users SET name=(:name), notes=(:notes), email=(:email), gender=(:gender), mobile=(:mobileno), hor=(:hor), dob=(:dob), nationality=(:nationality),
+	   case_status=(:case_status),case_type=(:case_type), fee=(:fee), registration_date=(:registration_date), image=(:image) WHERE id=(:idedit)";
 	$query = $dbh->prepare($sql);
 	$query-> bindParam(':name', $name, PDO::PARAM_STR);
+	$query-> bindParam(':notes', $notes, PDO::PARAM_STR);
 	$query-> bindParam(':email', $email, PDO::PARAM_STR);
 	$query-> bindParam(':gender', $gender, PDO::PARAM_STR);
 	$query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
-	$query-> bindParam(':designation', $designation, PDO::PARAM_STR);
-	$query-> bindParam(':image', $image, PDO::PARAM_STR);
+    $query-> bindParam(':hor', $hor, PDO::PARAM_STR);
+    $query-> bindParam(':dob', $dob, PDO::PARAM_STR);
+    $query-> bindParam(':nationality', $nationality, PDO::PARAM_STR);
+    $query-> bindParam(':case_status', $case_status, PDO::PARAM_STR);
+    $query-> bindParam(':case_type', $case_type, PDO::PARAM_STR);
+    $query-> bindParam(':fee', $fee, PDO::PARAM_STR);
+    $query-> bindParam(':registration_date', $registration_date, PDO::PARAM_STR);
+    $query-> bindParam(':image', $image, PDO::PARAM_STR);
 	$query-> bindParam(':idedit', $idedit, PDO::PARAM_STR);
 	$query->execute();
-	$msg="Information Updated Successfully";
+	$msg="User Updated Successfully";
 }    
 ?>
 
@@ -79,6 +95,7 @@ if(isset($_POST['submit']))
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.tiny.cloud/1/6tkctvmgs1kr7aueepgd4htsp10x8869my73yl05pefp44jv/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 	<script type= "text/javascript" src="../vendor/countries.js"></script>
 	<style>
@@ -130,11 +147,11 @@ if(isset($_POST['submit']))
 <div class="form-group">
 <label class="col-sm-2 control-label">Name<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name);?>">
+<input type="text" name="name" class="form-control" required value="<?php echo $result->name;?>">
 </div>
 <label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="email" name="email" class="form-control" required value="<?php echo htmlentities($result->email);?>">
+<input type="email" name="email" class="form-control" required value="<?php echo $result->email;?>">
 </div>
 </div>
 
@@ -142,42 +159,91 @@ if(isset($_POST['submit']))
 <label class="col-sm-2 control-label">Gender<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <select name="gender" class="form-control" required>
-                            <option value="">Select</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            </select>
+    <option value="">Select</option>
+     <option value="Male" <?php if($result->gender == "Male") echo "selected"; ?>>Male</option>
+     <option value="Female" <?php if($result->gender == "Female") echo "selected"; ?>>Female</option>
+  </select>
 </div>
-<label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Date of birth<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation);?>">
+<input type="text" name="dob" class="form-control" required value="<?php echo $result->dob;?>">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Nationality<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<select name="nationality" class="form-control" required>
+    <option value="">Select</option>
+     <option value="Pakistani" <?php if($result->nationality == "Pakistani") echo "selected"; ?>>Pakistani</option>
+     <option value="Non Pakistani" <?php if($result->nationality == "Non Pakistani") echo "selected"; ?>>Non Pakistani</option>
+  </select>
+</div>
+
+<label class="col-sm-2 control-label">House Office Reference<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="hor" class="form-control" required value="<?php echo $result->hor;?>">
 </div>
 </div>
 
 
 <div class="form-group">
+<label class="col-sm-2 control-label">Case Type<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="case_type" class="form-control" required value="<?php echo $result->case_type;?>">
+</div>
+
+<label class="col-sm-2 control-label">Case Status<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="case_status" class="form-control" required value="<?php echo $result->case_status;?>">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-sm-2 control-label">Outstanding Fee<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="fee" class="form-control" required value="<?php echo $result->fee;?>">
+</div>
+
+<label class="col-sm-2 control-label">Case Registration Date<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="registration_date" class="form-control" required value="<?php echo $result->registration_date;?>">
+</div>
+</div>
+
+<div class="form-group">
+	  <label class="col-sm-2 control-label">Phone<span style="color:red">*</span></label>
+    <div class="col-sm-4">
+    <input type="text" name="mobileno" value="<?php echo $result->mobile; ?>" class="form-control" required>
+    </div>
 <label class="col-sm-2 control-label">Image<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <input type="file" name="image" class="form-control">
 </div>
-
-<label class="col-sm-2 control-label">Mobile No.<span style="color:red">*</span></label>
-<div class="col-sm-4">
-<input type="number" name="mobileno" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
 </div>
+
+  <div class="form-group">
+     <label class="col-sm-2 control-label">Notes</label>
+      <div class="col-sm-10">
+       <textarea id="notes" name="notes"><?php echo $result->notes; ?></textarea>
+      </div>
 </div>
 
 <div class="form-group">
 	<div class="col-sm-8 col-sm-offset-2">
-		<img src="../images/<?php echo htmlentities($result->image);?>" width="150px"/>
-		<input type="hidden" name="image" value="<?php echo htmlentities($result->image);?>" >
-		<input type="hidden" name="idedit" value="<?php echo htmlentities($result->id);?>" >
+		<img src="../images/<?php echo $result->image;?>" width="150px"/>
+		<input type="hidden" name="image" value="<?php echo $result->image;?>" >
+		<input type="hidden" name="idedit" value="<?php echo $result->id;?>" >
 </div>
 </div>
 
 
 <div class="form-group">
 	<div class="col-sm-8 col-sm-offset-2">
-		<button class="btn btn-primary" name="submit" type="submit">Save Changes</button>
+		<button style="background: maroon;
+    color: white;
+    font-size: 17px;
+    padding: 7px 9px;" class="btn btn-primary" name="submit" type="submit">Save Changes</button>
 	</div>
 </div>
 
@@ -213,6 +279,14 @@ if(isset($_POST['submit']))
 					setTimeout(function() {
 						$('.succWrap').slideUp("slow");
 					}, 3000);
+
+                  
+
+                     tinymce.init({
+                        selector: '#notes'
+                     }); 
+
+
 					});
 	</script>
 

@@ -39,11 +39,11 @@ body {
   font-size: 1em;
 }
 a {
-  color: #37a6c4;
+  color: maroon
 }
 a:hover {
   text-decoration: none;
-  color: #5db9d1;
+  color: maroon;
 }
 /****************************
 *      Buttons        *
@@ -148,7 +148,7 @@ a:hover {
 }
 .hr-dashed {
   background-color: transparent;
-  border-top: 1px dotted #edf0f5;
+  border-top: 2px solid maroon;
   color: transparent;
   height: 1px;
   margin: 20px 0;

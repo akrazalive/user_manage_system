@@ -73,7 +73,7 @@ $bg=$query->rowCount();
 											<a href="userlist.php" class="block-anchor panel-footer">Full Detail <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-3 hide">
 										<div class="panel panel-default">
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
@@ -95,7 +95,7 @@ $regbd=$query1->rowCount();
 										</div>
 									</div>
 
-													<div class="col-md-3">
+													<div class="col-md-3 hide">
 										<div class="panel panel-default">
 											<div class="panel-body bk-danger text-light">
 												<div class="stat-panel text-center">

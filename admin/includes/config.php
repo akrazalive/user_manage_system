@@ -1,9 +1,9 @@
 ﻿<?php 
 // DB credentials.
 define('DB_HOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','ums');
+define('DB_USER','baklawpo_user');
+define('DB_PASS','PiHO,&V]r^kP');
+define('DB_NAME','baklawpo_db');
 // Establish database connection.
 try
 {

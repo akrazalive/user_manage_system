@@ -1,0 +1,12 @@
+[30-Mar-2024 06:15:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'designation' in 'field list' in /home/baklawpo/public_html/register.php:44
+Stack trace:
+#0 /home/baklawpo/public_html/register.php(44): PDOStatement->execute()
+#1 {main}
+  thrown in /home/baklawpo/public_html/register.php on line 44
+[30-Mar-2024 06:25:57 UTC] Executed SQL Query: SELECT email,password FROM users WHERE email=:email and password=:password and status=:status
+[30-Mar-2024 06:27:06 UTC] Executed SQL Query: SELECT email,password FROM users WHERE email=:email and password=:password
+[30-Mar-2024 06:28:23 UTC] SQL Error: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+[30-Mar-2024 06:29:15 UTC] SQL Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mobileno' in 'where clause'
+[30-Mar-2024 06:29:17 UTC] SQL Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mobileno' in 'where clause'
+[30-Mar-2024 06:29:29 UTC] SQL Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mobileno' in 'where clause'
+[30-Mar-2024 06:32:59 UTC] Executed SQL Query: SELECT email,password FROM users WHERE email=:email and password=:password

@@ -17,7 +17,7 @@ if(strlen($_SESSION['alogin'])==0)
 											<th>Email</th>
 											<th>Gender</th>
 											<th>Phone</th>
-											<th>Designation</th>
+											<th>Case Status</th>
 										</tr>
 									</thead>
 
@@ -40,7 +40,7 @@ echo '
 <td>'.$Email= $result->email.'</td> 
 <td>'.$Gender= $result->gender.'</td> 
 <td>'.$Phone= $result->mobile.'</td> 
-<td>'.$Designation= $result->designation.'</td> 					
+<td>'.$Designation= $result->case_status.'</td> 					
 </tr>  
 ';
 header("Content-type: application/octet-stream");

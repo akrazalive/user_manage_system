@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 include('includes/config.php');
 if(isset($_POST['submit']))
 {
@@ -78,7 +79,7 @@ $error="Something went wrong. Please try again";
 
 	function validate()
         {
-            var extensions = new Array("jpg","jpeg");
+            var extensions = new Array("jpg","jpeg","png","webp","gif","bmp","jfif");
             var image_file = document.regform.image.value;
             var image_length = document.regform.image.value.length;
             var pos = image_file.lastIndexOf('.') + 1;
@@ -92,7 +93,7 @@ $error="Something went wrong. Please try again";
                 
                 }
             }
-            alert("Image Extension Not Valid (Use Jpg,jpeg)");
+            alert("Image Extension Not Valid (Use Jpg,jpeg,png,jfif,bmp)");
             return false;
         }
         
@@ -105,9 +106,10 @@ $error="Something went wrong. Please try again";
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="text-center text-bold mt-2x">Register</h1>
-                        <div class="hr-dashed"></div>
-						<div class="well row pt-2x pb-3x bk-light text-center">
+                        <h1 class="text-center text-bold mt-2x">Bak Law Portal</h1>
+                        <h6 class="text-center text-bold ">Create your account</h1>
+                                                <div class="hr-dashed"></div>
+						<div class="well row pt-2x pb-3x text-center">
                          <form method="post" class="form-horizontal" enctype="multipart/form-data" name="regform" onSubmit="return validate();">
                             <div class="form-group">
                             <label class="col-sm-1 control-label">Name<span style="color:red">*</span></label>
@@ -149,18 +151,19 @@ $error="Something went wrong. Please try again";
                             </div>
 
                              <div class="form-group">
-                            <label class="col-sm-1 control-label">Avtar<span style="color:red">*</span></label>
+                            <label class="col-sm-1 control-label">Picture<span style="color:red">*</span></label>
                             <div class="col-sm-5">
                             <div><input type="file" name="image" class="form-control"></div>
                             </div>
                             </div>
 
 								<br>
-                                <button class="btn btn-primary" name="submit" type="submit">Register</button>
-                                </form>
+                             <button class="btn btn-success btn-md" name="submit" type="submit" style="padding: 5px 23px; font-size: 17px; background: maroon;">
+                                     Register</button>
+                              </form>
                                 <br>
                                 <br>
-								<p>Already Have Account? <a href="index.php" >Signin</a></p>
+								<p>Already Have Account? <a href="index.php" >Sign In</a></p>
 							</div>
 						</div>
 				</div>

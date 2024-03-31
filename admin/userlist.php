@@ -84,6 +84,19 @@ if(isset($_REQUEST['unconfirm']))
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
+
+<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
   <style>
 
 	.errorWrap {
@@ -126,17 +139,16 @@ if(isset($_REQUEST['unconfirm']))
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap" id="msgshow"><?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap" id="msgshow"><?php echo htmlentities($msg); ?> </div><?php }?>
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+								<table id="userlist" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
 										<th>#</th>
 												<th>Image</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Gender</th>
-                                                <th>Phone</th>
-                                                <th>Designation</th>
-                                                <th>Account</th>
+                                                <th>Case Type</th>
+                                                <th>Case Status</th>
+                                                <th>Outstanding Fees</th>
+                                                <th>Registration Date</th>                                                
 											<th>Action</th>	
 										</tr>
 									</thead>
@@ -156,20 +168,12 @@ foreach($results as $result)
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><img src="../images/<?php echo htmlentities($result->image);?>" style="width:50px; border-radius:50%;"/></td>
                                             <td><?php echo htmlentities($result->name);?></td>
-                                            <td><?php echo htmlentities($result->email);?></td>
-                                            <td><?php echo htmlentities($result->gender);?></td>
-                                            <td><?php echo htmlentities($result->mobile);?></td>
-                                            <td><?php echo htmlentities($result->designation);?> 
-                                            <td>
+                                            <td><?php echo htmlentities($result->case_type);?></td>
+                                            <td><?php echo htmlentities($result->case_status);?></td>
+                                            <td><?php echo htmlentities($result->fee);?></td>
+                                            <td><?php echo htmlentities($result->registration_date);?> 
+                                          
                                             
-                                            <?php if($result->status == 1)
-                                                    {?>
-                                                    <a href="userlist.php?confirm=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Un-Confirm the Account')">Confirmed <i class="fa fa-check-circle"></i></a> 
-                                                    <?php } else {?>
-                                                    <a href="userlist.php?unconfirm=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Confirm the Account')">Un-Confirmed <i class="fa fa-times-circle"></i></a>
-                                                    <?php } ?>
-</td>
-                                            </td>
 											
 <td>
 <a href="edit-user.php?edit=<?php echo $result->id;?>" onclick="return confirm('Do you want to Edit');">&nbsp; <i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
@@ -190,22 +194,22 @@ foreach($results as $result)
 	</div>
 
 	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+	
 	<script type="text/javascript">
 				 $(document).ready(function () {          
 					setTimeout(function() {
 						$('.succWrap').slideUp("slow");
 					}, 3000);
 					});
-		</script>
+
+
+				 $(document).ready(function() {
+
+				    $('#userlist').DataTable({			      
+				    });
+
+                 });
+	</script>
 		
 </body>
 </html>

@@ -1,25 +1,17 @@
 <?php
 session_start();
 error_reporting(0);
+
+
+
+
+
 include('includes/config.php');
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
-else{
-	
-if(isset($_POST['submit']))
-  {	
-	$name=$_POST['name'];
-	$email=$_POST['email'];
-
-	$sql="UPDATE admin SET username=(:name), email=(:email)";
-	$query = $dbh->prepare($sql);
-	$query-> bindParam(':name', $name, PDO::PARAM_STR);
-	$query-> bindParam(':email', $email, PDO::PARAM_STR);
-	$query->execute();
-	$msg="Information Updated Successfully";
-}    
+else{   
 ?>
 
 <!doctype html>
@@ -33,7 +25,7 @@ if(isset($_POST['submit']))
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Edit Admin</title>
+	<title>Notes</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -72,16 +64,10 @@ if(isset($_POST['submit']))
 }
 		</style>
 
+
 </head>
 
 <body>
-<?php
-		$sql = "SELECT * from admin;";
-		$query = $dbh -> prepare($sql);
-		$query->execute();
-		$result=$query->fetch(PDO::FETCH_OBJ);
-		$cnt=1;	
-?>
 	<?php include('includes/header.php');?>
 	<div class="ts-main-content">
 	<?php include('includes/leftbar.php');?>
@@ -89,47 +75,43 @@ if(isset($_POST['submit']))
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="page-title">Manage Admin</h3>
+						<h3 class="page-title">Notes</h3>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="panel panel-default">
-									<div class="panel-heading">Edit Info</div>
-<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+								<div class="panel panel-default" style="
+    border: 1px solid maroon;
+">
+									<div class="panel-heading" style="
+    background:maroon; color: white;
+">Notes</div>
+									   <div class="panel-body">
+<?php 
+$reciver = $_SESSION['alogin'];
+$sql = "SELECT notes from  users where email = (:reciver)";
+$query = $dbh -> prepare($sql);
+$query-> bindParam(':reciver', $reciver, PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+		foreach($results as $result)
+		{				
+        
 
-									<div class="panel-body">
-<form method="post" class="form-horizontal" enctype="multipart/form-data">
-<div class="form-group">
-<label class="col-sm-2 control-label">Username<span style="color:red">*</span></label>
-<div class="col-sm-4">
-<input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->username);?>">
-</div>
-<label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
-<div class="col-sm-4">
-<input type="email" name="email" class="form-control" required value="<?php echo htmlentities($result->email);?>">
-</div>
-</div>
-
-
-<div class="form-group">
-	<div class="col-sm-8 col-sm-offset-2">
-		<button style="background: maroon;
-    color: white;
-    font-size: 17px;
-    padding: 7px 9px;" class="btn btn-primary" name="submit" type="submit">Save Changes</button>
-	</div>
-</div>
-
-</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+          echo $result->notes;
+  
+		}
+} ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
